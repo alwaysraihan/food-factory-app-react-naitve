@@ -6,16 +6,18 @@ const ITEM_WIDTH = 120;
 
 const Walkthrough1 = () => {
     // Row1
-    const [row1Images, setRow1Images] = React.useState([
+    const [row1Images, setRow1Images] = useState([
         ...constants.walkthrough_01_01_images,
         ...constants.walkthrough_01_01_images
     ]);
-    const [currentPosition, setCurrentPositon] = React.useState(0);
+    const [currentPosition, setCurrentPositon] = useState(0);
     // Row2
-    const [row2Images, setRow2Images] = React.useState([
+    const [row2Images, setRow2Images] = useState([
         ...constants.walkthrough_01_02_images,
         ...constants.walkthrough_01_02_images,
+    
     ]);
+    console.log([...constants.walkthrough_01_01_images]);
     const [row2CurrentPosition, setRow2CurrentPositon] = useState(0);
 
     // Ref
@@ -25,7 +27,7 @@ const Walkthrough1 = () => {
     useEffect(()=>{
         let positionTimer
         const timer = ()=>{
-            positionTimer(() => {
+            positionTimer= setTimeout(() => {
               // Inceremennt scroll postion with each new interval
 
             //   slider 1
@@ -67,6 +69,7 @@ const Walkthrough1 = () => {
                 scrollEnabled={false}
                 renderItem={({ item, index }) => {
                     return  (<View
+                    key={index}
                     style={{
                             width:ITEM_WIDTH,
                             alignItems:"center",
@@ -74,10 +77,10 @@ const Walkthrough1 = () => {
                         }
                     }
                     >
-<Image
-source={item}
-style={{width:110, height:110}}
-/>
+                <Image
+                source={item}
+                style={{width:110, height:110}}
+                />
                     </View>)
                 }}
             />
@@ -86,20 +89,25 @@ style={{width:110, height:110}}
             <FlatList
                 ref={row2FlatListRef}
                 decelerationRate="fast"
-                style={{ marginTop: SIZES.padding }}
+                style={{
+               marginTop: SIZES.padding,
+                transform:[{rotate:"180deg"}]
+                }}
                 horizontal
                 showsHorizontalScrollIndicator={false}
                 listKey="Slider2"
                 keyExtractor={(_, index) => `Slider2_${index}`}
-                
-                data={row2Images}
                 scrollEnabled={false}
+                data={row2Images}
+               
                 renderItem={({ item, index }) => {
                     return  (<View
+                    key={index}
                         style={{
                                 width:ITEM_WIDTH,
                                 alignItems:"center",
-                                justifyContent:'center'
+                                justifyContent:'center',
+                                transform:[{rotate:"180deg"}]
                             }
                         }
                         >
