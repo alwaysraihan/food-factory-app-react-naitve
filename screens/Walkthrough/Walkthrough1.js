@@ -17,7 +17,6 @@ const Walkthrough1 = () => {
         ...constants.walkthrough_01_02_images,
     
     ]);
-    console.log([...constants.walkthrough_01_01_images]);
     const [row2CurrentPosition, setRow2CurrentPositon] = useState(0);
 
     // Ref

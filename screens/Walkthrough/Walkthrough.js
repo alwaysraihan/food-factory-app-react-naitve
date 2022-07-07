@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import {View, Animated, Text} from 'react-native';
 import {color} from 'react-native-reanimated';
 
@@ -8,6 +8,13 @@ import Walkthrough1 from './Walkthrough1';
 import Walkthrough2 from './Walkthrough2';
 
 const Walkthrough = () => {
+
+  const [walkthrough2Animated, setWalkthrough2Animated]=useState(false)
+  const onViewChangeRef= useRef(({viewableItems, changed})=>{
+    if(viewableItems[0].index==1){
+      setWalkthrough2Animated(true)
+    }
+  })
   const scrollX = useRef(new Animated.Value(0)).current;
   const dotPosition = Animated.divide(scrollX, SIZES.width);
   const Dots = () => {
@@ -105,6 +112,7 @@ const Walkthrough = () => {
         decelerationRate="fast"
         showsHorizontalScrollIndicator={false}
         scrollEventThrottle={16}
+        onViewableItemsChanged={onViewChangeRef.current}
 
         onScroll={Animated.event(
           [{nativeEvent: {contentOffset: {x:scrollX}}}],
@@ -121,7 +129,7 @@ const Walkthrough = () => {
               {/* walkthrough Images  */}
               <View style={{flex: 1, justifyContent:'center', }}>
 {index===0 &&   <Walkthrough1/>}
-{index===1 &&   <Walkthrough2/>}
+{index===1 &&   <Walkthrough2 animate={walkthrough2Animated}/>}
                
               </View>
               {/* Title and description  */}
