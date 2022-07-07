@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { StyleSheet, Image, View ,Text} from "react-native";
 import { FlatList } from "react-native-gesture-handler";
 import { SIZES, constants } from "../../constants";
@@ -21,8 +21,8 @@ const Walkthrough1 = () => {
     const [row2CurrentPosition, setRow2CurrentPositon] = useState(0);
 
     // Ref
-    const row1FlatListRef = React.useRef();
-    const row2FlatListRef = React.useRef();
+    const row1FlatListRef = useRef();
+    const row2FlatListRef = useRef();
 
     useEffect(()=>{
         let positionTimer
@@ -45,6 +45,24 @@ const Walkthrough1 = () => {
                }
             })
             // slider 2  
+
+            setRow2CurrentPositon(prevPositon=>{
+                const position = Number(prevPositon)+1
+                row2FlatListRef?.current.scrollToOffset({offset:position,animated:false})
+                const maxOffset= constants.walkthrough_01_02_images.length * ITEM_WIDTH
+                if(prevPositon>maxOffset){
+                    const offset= prevPositon-maxOffset
+
+                    row2FlatListRef?.current?.scrollToOffset({offset, 
+                        animated:false})
+                        return offset
+                       }
+                else{
+                    return position
+
+                }
+
+            })
 
             timer()
             }, 32);
