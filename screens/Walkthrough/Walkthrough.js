@@ -5,6 +5,7 @@ import {color} from 'react-native-reanimated';
 import {TextButton} from '../../components';
 import {COLORS, SIZES, constants, FONTS} from '../../constants';
 import Walkthrough1 from './Walkthrough1';
+import Walkthrough2 from './Walkthrough2';
 
 const Walkthrough = () => {
   const scrollX = useRef(new Animated.Value(0)).current;
@@ -120,6 +121,7 @@ const Walkthrough = () => {
               {/* walkthrough Images  */}
               <View style={{flex: 1, justifyContent:'center', }}>
 {index===0 &&   <Walkthrough1/>}
+{index===1 &&   <Walkthrough2/>}
                
               </View>
               {/* Title and description  */}
