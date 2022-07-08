@@ -1,5 +1,5 @@
 import { StyleSheet, View,Image } from 'react-native'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { SIZES,images } from '../../constants'
 import {MotiImage, useDynamicAnimation} from 'moti'
 const Walkthrough2 = ({animate}) => {
@@ -24,6 +24,30 @@ const Walkthrough2 = ({animate}) => {
         top:"27%",
         left:'50%'
     }))
+    useEffect(()=>{
+if(animate){
+    motiImage1.animateTo({
+        top:"20%",
+        left:"15%"
+    })
+    motiImage2.animateTo({
+        top:"38%",
+        left:-10
+    })
+    motiImage3.animateTo({
+        top:"62%",
+        left:"5%"
+    })
+    motiImage4.animateTo({
+        top:"75%",
+        left:"60%"
+    })
+    motiImage5.animateTo({
+        top:"15%",
+        left:"65%"
+    })
+}
+    },[animate])
   return (
     <View style={
         {flex:1,

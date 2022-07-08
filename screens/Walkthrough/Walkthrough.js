@@ -14,6 +14,7 @@ const Walkthrough = () => {
     if(viewableItems[0].index==1){
       setWalkthrough2Animated(true)
     }
+   
   })
   const scrollX = useRef(new Animated.Value(0)).current;
   const dotPosition = Animated.divide(scrollX, SIZES.width);
