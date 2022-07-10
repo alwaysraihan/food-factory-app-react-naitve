@@ -6,13 +6,23 @@ import {TextButton} from '../../components';
 import {COLORS, SIZES, constants, FONTS} from '../../constants';
 import Walkthrough1 from './Walkthrough1';
 import Walkthrough2 from './Walkthrough2';
+import Walkthrough3 from './Walkthrough3';
+import Walkthrough4 from './Walkthrough4';
 
 const Walkthrough = () => {
 
   const [walkthrough2Animated, setWalkthrough2Animated]=useState(false)
+  const [walkthrough3Animated, setWalkthrough3Animated]=useState(false)
+  const [walkthrough4Animated, setWalkthrough4Animated]=useState(false)
   const onViewChangeRef= useRef(({viewableItems, changed})=>{
     if(viewableItems[0].index==1){
       setWalkthrough2Animated(true)
+    }
+    if(viewableItems[0].index==2){
+      setWalkthrough3Animated(true)
+    }
+    if(viewableItems[0].index==3){
+      setWalkthrough4Animated(true)
     }
    
   })
@@ -131,6 +141,8 @@ const Walkthrough = () => {
               <View style={{flex: 1, justifyContent:'center', }}>
 {index===0 &&   <Walkthrough1/>}
 {index===1 &&   <Walkthrough2 animate={walkthrough2Animated}/>}
+{index===2 &&   <Walkthrough3 animate={walkthrough3Animated}/>}
+{index===3 &&   <Walkthrough4 animate={walkthrough4Animated}/>}
                
               </View>
               {/* Title and description  */}
