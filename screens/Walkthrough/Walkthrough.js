@@ -9,7 +9,7 @@ import Walkthrough2 from './Walkthrough2';
 import Walkthrough3 from './Walkthrough3';
 import Walkthrough4 from './Walkthrough4';
 
-const Walkthrough = () => {
+const Walkthrough = ({navigation}) => {
 
   const [walkthrough2Animated, setWalkthrough2Animated]=useState(false)
   const [walkthrough3Animated, setWalkthrough3Animated]=useState(false)
@@ -94,6 +94,10 @@ const Walkthrough = () => {
             }}
           />
           <TextButton
+          onPress={()=>navigation.reset({
+            index:0,
+            routes:[{name:"AuthMain"}]
+          })}
             label="Log In"
             contentContainerStyle={{
               flex: 1,

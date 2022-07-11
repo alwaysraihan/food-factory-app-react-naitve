@@ -1,12 +1,14 @@
 import React from 'react';
 import {
     View,
-    Text
+    Text,
+    Image
 } from 'react-native';
 
 import {
     CountryDropDown
 } from "../../components";
+import { COLORS, images, SIZES } from '../../constants';
 
 const AuthMain = () => {
 
@@ -102,8 +104,15 @@ const AuthMain = () => {
     }
 
     return (
-        <View>
-
+        <View
+        style={{
+            flex:1,
+            paddingHorizontal:SIZES.padding,
+            backgroundColor:COLORS.lightGrey
+        }}
+        >
+{/* Logo  */}
+<Image source={images.logo} style={{alignSelf:'center', marginTop:SIZES.padding*2, width:50, height:50}}/>
         </View>
     )
 }
