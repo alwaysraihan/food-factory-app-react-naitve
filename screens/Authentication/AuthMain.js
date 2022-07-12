@@ -7,13 +7,14 @@ import {
     Modal,
     TouchableWithoutFeedback,
     FlatList,
-    TouchableOpacity
+    TouchableOpacity,
+    ScrollView
 } from 'react-native';
 import { COLORS, FONTS, icons, images, SIZES } from '../../constants';
 import {MotiView,useAnimationState} from "moti"
 import {Shadow} from "react-native-shadow-2"
 import {
-    CountryDropDown, TextButton,FormInput, IconButton
+    CountryDropDown, TextButton,FormInput, IconButton, Checkbox
 } from "../../components";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view"
 const AuthMain = () => {
@@ -26,6 +27,9 @@ const AuthMain = () => {
     const [phone, setPhone]=useState("")
     const [passworad, setPasswoard]=useState("")
     const [selectedCountry, setSelectedCountry]=useState(null)
+    
+    // checkobox states 
+    const [checkbox, setCheckbox]=useState(false)
 
     // passworad icon visible or not visible states 
     const [isVisible, setisVisible]=useState(false)
@@ -139,7 +143,9 @@ onPress={()=>console.log("Log In Success")}
             
     }
     function renderSignUp(){
-        return <MotiView state={animiationState} style={{marginTop:SIZES.padding}}>
+        return (
+          
+                <MotiView state={animiationState} style={{marginTop:SIZES.padding}}>
         <View style={styles.authConatiner}>
         <Text style={{width:"80%", lineHeight:45, color:COLORS.dark,...FONTS.h1}}>Create new account
 </Text>
@@ -221,15 +227,19 @@ onChange={(text)=>setPasswoard(text)}
 
 
 </KeyboardAwareScrollView>
-<TextButton label="Sign Up" contentContainerStyle={{height:55, marginTop:SIZES.radius, borderRadius:SIZES.radius, backgroundColor:COLORS.primary}} labelStyle={{
+<TextButton label="Create Account" contentContainerStyle={{height:55, marginTop:SIZES.radius, borderRadius:SIZES.radius, backgroundColor:COLORS.primary}} labelStyle={{
     
     ...FONTS.h3
 
 }}
 onPress={()=>console.log("Register In Success")}
 />
+{/* Terms and condition  */}
+<Checkbox conatinerStyle={{ marginTop:SIZES.radius,}} isSelected={checkbox} onPress={()=>setCheckbox(!checkbox)}/>
         </View>
     </MotiView>
+         
+        )
 
     }
     function renderAuthContainer() {
@@ -313,7 +323,8 @@ onPress={()=>console.log("Register In Success")}
     }
 
     return (
-        <View
+       <ScrollView showsVerticalScrollIndicator={false} style={{flex:1}}>
+         <View
         style={{
             flex:1,
             paddingHorizontal:SIZES.padding,
@@ -338,6 +349,7 @@ onPress={()=>console.log("Register In Success")}
 }}/>
 {renderCountryModal()}
         </View>
+       </ScrollView>
     )
 }
 const styles=StyleSheet.create({

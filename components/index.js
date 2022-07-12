@@ -2,10 +2,12 @@ import CountryDropDown from "./CountryDropDown";
 import TextButton from "./TextButton";
 import FormInput from "./FormInput";
 import IconButton from "./IconButton";
-IconButton
+import Checkbox from "./Checkbox";
 export {
     CountryDropDown,
     TextButton,
     FormInput,
-    IconButton
+    IconButton,
+  Checkbox
+
 }
