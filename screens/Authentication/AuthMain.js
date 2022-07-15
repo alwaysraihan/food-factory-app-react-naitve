@@ -146,7 +146,8 @@ onPress={()=>console.log("Log In Success")}
         return (
           
                 <MotiView state={animiationState} style={{marginTop:SIZES.padding}}>
-        <View style={styles.authConatiner}>
+       <Shadow>
+       <View style={styles.authConatiner}>
         <Text style={{width:"80%", lineHeight:45, color:COLORS.dark,...FONTS.h1}}>Create new account
 </Text>
 <KeyboardAwareScrollView enableOnAndroid={true} keyboardDismissMode="on-drag" keyboardShouldPersistTaps={"handled"} extraHeight={-300} contentContainerStyle={{ flexGrow:1, marginTop:SIZES.padding, paddingBottom:SIZES.padding*2}}>
@@ -171,7 +172,6 @@ onChange={(text)=>setName(text)}
      marginTop:SIZES.radius,
     borderRadius:SIZES.radius,
     backgroundColor:COLORS.error,
- 
 }} 
 placeholder="Email"
 value={email}
@@ -188,7 +188,6 @@ onChange={(text)=>setEmail(text)}
      marginTop:SIZES.radius,
     borderRadius:SIZES.radius,
     backgroundColor:COLORS.error,
- 
 }} 
 placeholder="Phone"
 value={phone}
@@ -235,8 +234,9 @@ onChange={(text)=>setPasswoard(text)}
 onPress={()=>console.log("Register In Success")}
 />
 {/* Terms and condition  */}
-<Checkbox conatinerStyle={{ marginTop:SIZES.radius,}} isSelected={checkbox} onPress={()=>setCheckbox(!checkbox)}/>
+<Checkbox conatinerStyle={{ marginTop:SIZES.radius, zIndex:2}} isSelected={checkbox} onPress={()=>setCheckbox(!checkbox)}/>
         </View>
+       </Shadow>
     </MotiView>
          
         )
@@ -321,35 +321,103 @@ onPress={()=>console.log("Register In Success")}
         )
        }
     }
-
+ function renderAuthContainerFooter(){
     return (
-       <ScrollView showsVerticalScrollIndicator={false} style={{flex:1}}>
-         <View
+        <View
         style={{
-            flex:1,
-            paddingHorizontal:SIZES.padding,
-            backgroundColor:COLORS.lightGrey
+            flexDirection:'row',
+            height:80,
+            alignItems:'flex-end',
+            justifyContent:'center',
+            marginTop:-30,
+            marginHorizontal:SIZES.radius,
+            paddingBottom:SIZES.radius,
+            borderBottomLeftRadius:SIZES.radius,
+            borderBottomRightRadius:SIZES.radius,
+            backgroundColor:COLORS.light,
+            zIndex:0,
         }}
         >
+            <Text
+            style={{
+                color:COLORS.grey,
+                ...FONTS.body5
+            }}
+            >
+                {mode=="signIn" ? "Dont have an account?" : "I already have an account."}
+            </Text>
+            <TextButton label={mode== "signIn" ? "Sign Up" : "Sign In"} contentContainerStyle={{
+                marginLeft:SIZES.base,
+                backgroundColor:null
+            }}
+            labelStyle={{
+                color:COLORS.support3,
+                ...FONTS.h5
+            }}
+            onPress={()=>{
+                if(animiationState.current==="signIn"){
+                    animiationState.transitionTo("signUp")
+                    setMode("signUp")
+                }else{
+                    animiationState.transitionTo("signIn")
+                    setMode("signIn")
+                }
+            }}
+            />
+        </View>
+    )
+ }
+
+
+//  render socail logins 
+function renderSocialLogins(){
+    return(
+        <View style={{
+            flex:1, 
+            alignItems:'center',
+            justifyContent:'center',
+            marginTop:20
+
+        }}>
+
+<Text style={{color:COLORS.dark, ...FONTS.body3}}>
+Or login with
+</Text>
+<View style={{flexDirection:"row", marginTop:SIZES.radius}}>
+<IconButton icon={icons.twitter} iconStyle={{tintColor:COLORS.dark}} containerStyle={styles.socailButtonConatiner}/>
+<IconButton icon={icons.google} iconStyle={{tintColor:COLORS.dark}} containerStyle={{...styles.socailButtonConatiner, marginLeft:SIZES.radius }}/>
+<IconButton icon={icons.linkedin} iconStyle={{tintColor:COLORS.dark}} containerStyle={{...styles.socailButtonConatiner, marginLeft:SIZES.radius }}/>
+</View>
+        </View>
+    )
+}
+    return (
+    //    <ScrollView showsVerticalScrollIndicator={false} style={{flex:1}}>
+                
+    //    </ScrollView>
+    <View
+    style={{
+        flex:1,
+        paddingHorizontal:SIZES.padding,
+        backgroundColor:COLORS.lightGrey,
+        marginBottom:SIZES.padding
+    }}
+    >
 {/* Logo  */}
 <Image source={images.logo} style={{alignSelf:'center', marginTop:SIZES.padding*2, width:50, height:50}}/>
 
 {/* Auth Container  */}
-<View>
-    {renderAuthContainer()}
+<View style={{zIndex:1}}>
+{renderAuthContainer()}
 </View>
-<TextButton label="Togole" onPress={()=>{
-    if(animiationState.current==="signIn"){
-        animiationState.transitionTo("signUp")
-        setMode("signUp")
-    }else{
-        animiationState.transitionTo("signIn")
-        setMode("signIn")
-    }
-}}/>
+{renderAuthContainerFooter()}
+
+
+{/* Social Logins  */}
+{mode=="signIn" && renderSocialLogins()}
+{/* country modal  */}
 {renderCountryModal()}
-        </View>
-       </ScrollView>
+    </View>
     )
 }
 const styles=StyleSheet.create({
@@ -357,11 +425,20 @@ const styles=StyleSheet.create({
       flex:1,
       width:SIZES.width-(SIZES.padding * 2),
       paddingHorizontal:SIZES.padding,
-      paddingVertical:10,
- 
-      borderRadius:SIZES.radius,
+      paddingVertical:10, 
+       borderRadius:SIZES.radius,
       backgroundColor:COLORS.light,
+      zIndex:1
       
+    },
+    socailButtonConatiner:{
+        width:50,
+        height:55,
+        alignItems:'center',
+        justifyContent:'center',
+        borderRadius:SIZES.radius,
+        backgroundColor:COLORS.grey20,
+
     }
 })
 

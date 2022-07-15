@@ -9,7 +9,7 @@ const Checkbox = ({conatinerStyle, isSelected, onPress}) => {
 <Image source={icons.checkmark} style={{width:20, height:20, tintColor:COLORS.light}}/>
 }
         </View>
-        <Text style={{flex:1, marginLeft:SIZES.base, ...FONTS.body5}}>By resgistering, you agree to our terms and that you have read our Data Use Policy.</Text>
+        <Text style={{flex:1, marginLeft:SIZES.base, ...FONTS.body5}}>By resgistering, you agree to our terms and Policy.</Text>
     </TouchableOpacity>
   )
 }
